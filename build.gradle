@@ -12,6 +12,13 @@ plugins {
     id 'application'
 }
 
+test {
+    testLogging.exceptionFormat = 'full'
+    testLogging.showExceptions = true
+    testLogging.showCauses = false
+    testLogging.showStackTraces = false
+}
+
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
