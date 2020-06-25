@@ -60,6 +60,18 @@ class GildedRoseTest {
         )
     }
 
+    @Test fun should_update_until_day_1000() {         
+        val gildedRoseLegacy = GildedRose(fakeItems())
+        val newGildedRose = NewGildedRose(fakeItems())
+
+        for (i in 1..1000) {
+            gildedRoseLegacy.updateQuality()
+            newGildedRose.updateQuality()
+
+            assertThat(gildedRoseLegacy.items.joinToString()).isEqualTo(newGildedRose.items.joinToString())
+        }
+    }
+
     private fun updateItemsUntilDay(day: Int) : String {      
         val items = fakeItems()            
         val app = GildedRose(items)
