@@ -19,7 +19,6 @@ class GildedRoseTest {
             Backstage passes to a TAFKAL80ETC concert, 14, 21
             Backstage passes to a TAFKAL80ETC concert, 9, 50
             Backstage passes to a TAFKAL80ETC concert, 4, 50
-            Conjured Mana Cake, 2, 5
             """.trimIndent()
         )
     }
@@ -37,7 +36,6 @@ class GildedRoseTest {
             Backstage passes to a TAFKAL80ETC concert, 13, 22
             Backstage passes to a TAFKAL80ETC concert, 8, 50
             Backstage passes to a TAFKAL80ETC concert, 3, 50
-            Conjured Mana Cake, 1, 4
             """.trimIndent()
         )
     }
@@ -55,7 +53,6 @@ class GildedRoseTest {
             Backstage passes to a TAFKAL80ETC concert, -85, 0
             Backstage passes to a TAFKAL80ETC concert, -90, 0
             Backstage passes to a TAFKAL80ETC concert, -95, 0
-            Conjured Mana Cake, -97, 0
             """.trimIndent()
         )
     }
@@ -70,6 +67,20 @@ class GildedRoseTest {
 
             assertThat(gildedRoseLegacy.items.joinToString()).isEqualTo(newGildedRose.items.joinToString())
         }
+    }
+
+    @Test fun should_update_conjured_mana_cake() {
+        val newGildedRose = NewGildedRose(arrayOf(Item("Conjured Mana Cake", 5, 7)))
+        newGildedRose.updateQuality()
+
+        assertThat(newGildedRose.items.joinToString()).isEqualTo("Conjured Mana Cake, 4, 5")
+    }
+
+    @Test fun should_update_conjured_mana_cake_when_sell_in_is_negative() {
+        val newGildedRose = NewGildedRose(arrayOf(Item("Conjured Mana Cake", 0, 7)))
+        newGildedRose.updateQuality()
+
+        assertThat(newGildedRose.items.joinToString()).isEqualTo("Conjured Mana Cake, -1, 3")
     }
 
     private fun updateItemsUntilDay(day: Int) : String {      
@@ -91,7 +102,6 @@ class GildedRoseTest {
             Item("Sulfuras, Hand of Ragnaros", -1, 80),
             Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
             Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-            Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-            Item("Conjured Mana Cake", 3, 6)
+            Item("Backstage passes to a TAFKAL80ETC concert", 5, 49)
         )
 }
